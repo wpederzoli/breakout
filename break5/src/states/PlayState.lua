@@ -114,6 +114,14 @@ function PlayState:update(dt)
         end
     end
 
+    -- if ball goes below bounds
+    if self.ball.y >= VIRTUAL_HEIGHT then
+        gSounds['hurt']:play()
+        gStateMachine:change('game_over', {
+            score = 10
+        })
+    end
+
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
     end

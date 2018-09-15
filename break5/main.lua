@@ -50,14 +50,16 @@ function love.load()
         ['confirm'] = love.audio.newSource('sounds/confirm.wav', 'static'),
         ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav', 'static'),
         ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.wav', 'static'),
-        ['brick_hit'] = love.audio.newSource('sounds/brick_hit.wav', 'static')
+        ['brick_hit'] = love.audio.newSource('sounds/brick_hit.wav', 'static'),
+        ['hurt'] = love.audio.newSource('sounds/hurt.wav', 'static')
     }
 
     --initialize stateMachine to handle game states
     gStateMachine = StateMachine {
         ['start'] = function() return StartState() end,
         ['play'] = function() return PlayState() end,
-        ['serve'] = function() return ServeState()  end
+        ['serve'] = function() return ServeState()  end,
+        ['game_over'] = function() return GameOver() end
     }
     gStateMachine:change('start')
     
