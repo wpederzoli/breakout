@@ -33,7 +33,8 @@ function love.load()
     gFrames = {
         ['paddles'] = GenerateQuadsPaddles(gTextures['main']),
         ['balls'] = GenerateQuadsBalls(gTextures['main']),
-        ['bricks'] = GenerateQuadsBricks(gTextures['main'])
+        ['bricks'] = GenerateQuadsBricks(gTextures['main']),
+        ['hearts'] = GenerateQuads(gTextures['hearts'], 10, 9)
     }
     --initialize virtual resolution, which will be rendered
     -- within the actual window
@@ -125,6 +126,27 @@ function renderScore(score)
     love.graphics.setFont(gFonts['small'])
     love.graphics.print('Score:', VIRTUAL_WIDTH - 60, 5)
     love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 50, 5, 40, 'right')
+end
+
+--[[
+    Renders hearts based on how many lives the player has. It renders
+    full hearts representing the lives remaining and empty hearts representing
+    the lost lives.
+]]
+function renderLives(lives)
+    local livesX = VIRTUAL_WIDTH - 100
+    
+    -- render lives left
+    for i = 1, lives do
+        love.graphics.draw(gTextures['hearts'], gFrames['hearts'][1], livesX, 4)
+        livesX = livesX + 11
+    end
+
+    --render missing lives
+    for i = 1, 3 - lives do
+        love.graphics.draw(gTextures['hearts'], gFrames['hearts'][2], livesX, 4)
+        livesX = livesX + 11
+    end
 end
 
 --function to render FPS

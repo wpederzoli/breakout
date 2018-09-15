@@ -12,6 +12,7 @@ function ServeState:enter(params)
     self.paddle = params.paddle
     self.bricks = params.bricks
     self.score = params.score
+    self.lives = params.lives
     
     --init new ball (random color)
     self.ball = Ball()
@@ -28,7 +29,8 @@ function ServeState:update(dt)
             paddle = self.paddle,
             bricks = self.bricks,
             ball = self.ball,
-            score = self.score
+            score = self.score,
+            lives = self.lives
         })
     end
 
@@ -42,6 +44,7 @@ function ServeState:render()
     self.ball:render()
 
     renderScore(self.score)
+    renderLives(self.lives)
 
     for k, brick in pairs(self.bricks) do
         brick:render()

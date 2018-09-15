@@ -14,6 +14,7 @@ function PlayState:enter(params)
     --initialize ball with skin #1
     self.ball = params.ball
     self.score = params.score
+    self.lives = params.lives
 
     self.pause = false
 
@@ -122,9 +123,19 @@ function PlayState:update(dt)
     -- if ball goes below bounds
     if self.ball.y >= VIRTUAL_HEIGHT then
         gSounds['hurt']:play()
-        gStateMachine:change('game_over', {
-            score = self.score
-        })
+        self.lives = self.lives - 1
+        if self.lives <= 0 then
+            gStateMachine:change('game_over', {
+                score = self.score
+            })
+        else
+            gStateMachine:change('serve', {
+                paddle = self.paddle,
+                score = self.score,
+                lives = self.lives,
+                bricks = self.bricks
+            })
+        end
     end
 
     if love.keyboard.wasPressed('escape') then
@@ -142,6 +153,7 @@ function PlayState:render()
     self.ball:render()
 
     renderScore(self.score)
+    renderLives(self.lives)
 
     --pause text, if paused
     if self.pause then
