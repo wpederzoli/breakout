@@ -23,8 +23,8 @@ function PlayState:enter(params)
     self.ball.dy = math.random(-50, -60)
 
     --give ball position in the center
-    self.ball.x = VIRTUAL_WIDTH / 2 - 4
-    self.ball.y = VIRTUAL_HEIGHT - 42
+    -- self.ball.x = VIRTUAL_WIDTH / 2 - 4
+    -- self.ball.y = VIRTUAL_HEIGHT - 42
 
     --use the "static" createMap function to generate bricks
     self.bricks = params.bricks
