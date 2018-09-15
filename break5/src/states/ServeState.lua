@@ -11,6 +11,7 @@ function ServeState:enter(params)
     --get state from params
     self.paddle = params.paddle
     self.bricks = params.bricks
+    self.score = params.score
     
     --init new ball (random color)
     self.ball = Ball()
@@ -26,7 +27,8 @@ function ServeState:update(dt)
         gStateMachine:change('play', {
             paddle = self.paddle,
             bricks = self.bricks,
-            ball = self.ball
+            ball = self.ball,
+            score = self.score
         })
     end
 
@@ -38,6 +40,8 @@ end
 function ServeState:render()
     self.paddle:render()
     self.ball:render()
+
+    renderScore(self.score)
 
     for k, brick in pairs(self.bricks) do
         brick:render()

@@ -13,6 +13,8 @@ function PlayState:enter(params)
     self.paddle = params.paddle
     --initialize ball with skin #1
     self.ball = params.ball
+    self.score = params.score
+
     self.pause = false
 
     --ball's random starting velocity
@@ -71,6 +73,9 @@ function PlayState:update(dt)
             --trigger brick's hit function
             brick:hit()
 
+            --add to score
+            self.score = self.score + 10
+
              -- we check to see if the opposite side of our velocity is outside of the brick;
             -- if it is, we trigger a collision on that side. else we're within the X + width of
             -- the brick and should check to see if the top or bottom edge is outside of the brick,
@@ -118,7 +123,7 @@ function PlayState:update(dt)
     if self.ball.y >= VIRTUAL_HEIGHT then
         gSounds['hurt']:play()
         gStateMachine:change('game_over', {
-            score = 10
+            score = self.score
         })
     end
 
@@ -135,6 +140,8 @@ function PlayState:render()
 
     self.paddle:render()
     self.ball:render()
+
+    renderScore(self.score)
 
     --pause text, if paused
     if self.pause then

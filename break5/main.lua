@@ -120,6 +120,13 @@ function love.draw()
     push:apply('end')
 end
 
+--function to render score
+function renderScore(score)
+    love.graphics.setFont(gFonts['small'])
+    love.graphics.print('Score:', VIRTUAL_WIDTH - 60, 5)
+    love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 50, 5, 40, 'right')
+end
+
 --function to render FPS
 function displayFPS()
     love.graphics.setFont(gFonts['small'])
