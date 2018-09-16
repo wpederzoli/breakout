@@ -6,7 +6,7 @@
 VictoryState = Class{__includes = BaseState}
 
 function VictoryState:enter(params)
-    self.level = params.level
+    self.level = params.level or 1
     self.score = params.score
     self.paddle = params.paddle
     self.lives = params.lives
