@@ -15,7 +15,7 @@ function PlayState:enter(params)
     self.ball = params.ball
     self.score = params.score
     self.lives = params.lives
-    self.level = params.level or 1
+    self.level = params.level
 
     self.pause = false
 
@@ -146,7 +146,8 @@ function PlayState:update(dt)
                 paddle = self.paddle,
                 score = self.score,
                 lives = self.lives,
-                bricks = self.bricks
+                bricks = self.bricks,
+                level = self.level
             })
         end
     end
